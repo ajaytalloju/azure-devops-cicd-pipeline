@@ -1,1 +1,1 @@
-
+[![Python Application test with GitHub Actions](https://github.com/ajaytalloju/azure-devops-cicd-pipeline/actions/workflows/pythonapp.yml/badge.svg)](https://github.com/ajaytalloju/azure-devops-cicd-pipeline/actions/workflows/pythonapp.yml)
