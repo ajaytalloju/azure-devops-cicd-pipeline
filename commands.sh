@@ -2,7 +2,7 @@
 
 #To generate ssh key
 ssh-keygen -t rsa
-cat .ssh/id.rsa.pub
+cat .ssh/id_rsa.pub
 ssh -T git@github.com
 
 #Setup environment and test prediction
@@ -19,3 +19,4 @@ sh make_prediction.sh
 az webapp up -n ajay-flask-ml-webapp -g Azuredevops --sku B1
 az webapp show -n ajay-flask-ml-webapp -g Azuredevops --query defaultHostName
 sh make_predict_azure_app.sh
+az webapp log tail -n ajay-flask-ml-webapp -g Azuredevops
