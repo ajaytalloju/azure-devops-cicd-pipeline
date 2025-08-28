@@ -1,3 +1,4 @@
+
 [![Python Application test with GitHub Actions](https://github.com/ajaytalloju/azure-devops-cicd-pipeline/actions/workflows/pythonapp.yml/badge.svg)](https://github.com/ajaytalloju/azure-devops-cicd-pipeline/actions/workflows/pythonapp.yml)
 
 [![Build Status](https://dev.azure.com/odluser286298/azure-devops-cicd-pipeline/_apis/build/status%2Fajaytalloju.azure-devops-cicd-pipeline?branchName=main)](https://dev.azure.com/odluser286298/azure-devops-cicd-pipeline/_build/latest?definitionId=1&branchName=main)
@@ -22,43 +23,100 @@ Deployment to Azure App Service (PaaS) running a Flask-based ML API.
 ## Instructions
 
 <TODO:  
-* Architectural Diagram (Shows how key parts of the system work)>
-
-<TODO:  Instructions for running the Python project.  How could a user with no context run this project without asking you for any help.  Include screenshots with explicit steps to create that work. Be sure to at least include the following screenshots:
+* Architectural Diagram
+![CI Diagram](images/CI%20diagram.png)  
+![CD Diagram](images/CD%20diagram.png)
 
 * Project running on Azure App Service
 
-* Project cloned into Azure Cloud Shell
+# 1 Configuring Github
 
-* Passing tests that are displayed after running the `make all` command from the `Makefile`
+Login to Azure cloud shell
+Generate ssh key
+'''bash
+ssh-keygen -t rsa
+'''
+Copy the key and paste it in Github > Settings> SSH and GPG keys
+'''bash
+cat .ssh/id.rsa.pub
+'''
+Test ssh connection to github
+'''bash
+ssh -T git@github.com
+'''
+![SSH connection](images/successful%20ssh%20connection%20from%20cloud%20shell.png)
+
+# 2 Setup environment
+
+Clone the Repository
+'''bash
+git clone git@github.com:ajaytalloju/azure-devops-cicd-pipeline.git
+'''
+![Project cloned into Azure Cloud Shell](images/git%20repo%20clone.png)
+
+Create virtual environment
+'''bash
+cd azure-devops-cicd-pipeline
+make setup
+'''
+Activate venv
+'''bash
+source ~/.azure-devops-cicd-pipeline/bin/activate
+'''
+Install dependencies and run linting, testing
+'''bash
+make all
+'''
+![Setup env](images/make%20setup%20and%20make%20all.png)
+![Successful Tests](images/make%20all%20success.png)
 
 * Output of a test run
+![Test Run](images/app.py%20test%20run.png)
 
-* Successful deploy of the project in Azure Pipelines.  [Note the official documentation should be referred to and double checked as you setup CI/CD](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops).
+* Test prediction
+![Test prediction](images/successful%20prediction%20test.png)
 
-* Running Azure App Service from Azure Pipelines automatic deployment
+# 3 Creating Azure webapp
+'''bash
+az webapp up -n ajay-flask-ml-webapp -g Azuredevops --sku B1
+'''
+Check URL of webapp
+'''bash
+az webapp show -n ajay-flask-ml-webapp -g Azuredevops --query defaultHostName
+'''
+![Webapp Info](images/get%20webapp%20URL.png)
 
-* Successful prediction from deployed flask app in Azure Cloud Shell.  [Use this file as a template for the deployed prediction](https://github.com/udacity/nd082-Azure-Cloud-DevOps-Starter-Code/blob/master/C2-AgileDevelopmentwithAzure/project/starter_files/flask-sklearn/make_predict_azure_app.sh).
-The output should look similar to this:
+* Check prediction from webapp
+'''bash
+sh make_predict_azure_app.sh
+'''
+![Webapp prediction](images/successful%20prediction%20webapp.png)
 
-```bash
-udacity@Azure:~$ ./make_predict_azure_app.sh
-Port: 443
-{"prediction":[20.35373177134412]}
-```
+* Check logs of webapp
+'''bash
+az webapp log tail -n ajay-flask-ml-webapp -g Azuredevops
+'''
+![Log](images/Streamline%20log%20of%20webapp.png)
 
-* Output of streamed log files from deployed application
+* Check web interface of application
+![Web interface](images/App%20running%20web%20interface.png)
 
-> 
+# 4 Setup CI/CD pipeline
+
+* Setup CI using Github Actions
+![CI](images/successful%20CI%20with%20Github%20Actions.png)
+
+* Setup Azure Pipelines
+Login to Azure Devops Organization
+Create a project with Github as source code repository
+A push will run the pipeline automatically
+![Azure Pipeline](images/Successful%20CI:CD%20Azure%20Pipeline.png)
+
+[Note the official documentation should be referred to and double checked as you setup CI/CD](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops).
 
 ## Enhancements
 
-<TODO: A short description of how to improve the project in the future>
+* Kubernetes Deployment: Containerize with Docker and deploy using Azure Kubernetes Service (AKS) for scalability.
+* Monitoring: Integrate Azure Monitor or Application Insights to track performance and errors.
 
-## Demo 
-
-<TODO: Add link Screencast on YouTube>
-
-
-[![Python Application test with GitHub Actions](https://github.com/ajaytalloju/azure-devops-cicd-pipeline/actions/workflows/pythonapp.yml/badge.svg)](https://github.com/ajaytalloju/azure-devops-cicd-pipeline/actions/workflows/pythonapp.yml)
->>>>>>> fc75388 (Replacing scaffold)
+## Demo
