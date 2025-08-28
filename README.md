@@ -1,15 +1,23 @@
-<<<<<<< HEAD
 [![Python Application test with GitHub Actions](https://github.com/ajaytalloju/azure-devops-cicd-pipeline/actions/workflows/pythonapp.yml/badge.svg)](https://github.com/ajaytalloju/azure-devops-cicd-pipeline/actions/workflows/pythonapp.yml)
-=======
+
+[![Build Status](https://dev.azure.com/odluser286298/azure-devops-cicd-pipeline/_apis/build/status%2Fajaytalloju.azure-devops-cicd-pipeline?branchName=main)](https://dev.azure.com/odluser286298/azure-devops-cicd-pipeline/_build/latest?definitionId=1&branchName=main)
+
 # Overview
 
-<TODO: complete this with an overview of your project>
+In this project you will deploy Flask-based machine learning application that predicts housing prices using a pre-trained scikit-learn model. The application leverages Azure DevOps principles to implement Continuous Integration (CI) and Continuous Delivery (CD).
+
+Source code control with GitHub.
+
+Continuous Integration (CI) using GitHub Actions for linting, testing, and installation.
+
+Continuous Delivery (CD) with Azure Pipelines for automated deployment.
+
+Deployment to Azure App Service (PaaS) running a Flask-based ML API.
 
 ## Project Plan
-<TODO: Project Plan
 
-* A link to a Trello board for the project
-* A link to a spreadsheet that includes the original and final project plan>
+* Link to Trello Board: [Trello Board](https://trello.com/invite/b/68a98088f34b1b0dd009487e/ATTI270cf3de6531b6073ab898cd74c2e4f91706B70D/azure-devops-project-2-ci-cd-pipeline)
+* Link to spreadsheet of project plan: [Project plan](https://docs.google.com/spreadsheets/d/1xD8k5tAZsOyudxcCCzJGMHDJgEwFAX-DFNKFdtgRHn4/edit?usp=sharing)
 
 ## Instructions
 
