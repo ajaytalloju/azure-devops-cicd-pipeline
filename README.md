@@ -130,7 +130,7 @@ Login to Azure Devops Organization
 Create a project with Github as source code repository  
 A push will run the pipeline automatically  
 
-![Azure Pipeline](images/successful%20Azure%20Pipeline%202.png)
+![Azure Pipeline](images/Successful%20Azure%20pipeline%203.png)
 
 [Note the official documentation should be referred to and double checked as you setup CI/CD](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops).
 
@@ -150,4 +150,4 @@ locust -f locustfile.py --host=https://ajay-flask-ml-webapp.azurewebsites.net
 * Monitoring: Integrate Azure Monitor or Application Insights to track performance and errors.
 
 ## Demo
-[Link](https://youtu.be/HrrPF-g2RFM)
+[Link](https://youtu.be/UtmLsmbKdus)
