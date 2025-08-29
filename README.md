@@ -7,13 +7,10 @@
 
 In this project you will deploy Flask-based machine learning application that predicts housing prices using a pre-trained scikit-learn model. The application leverages Azure DevOps principles to implement Continuous Integration (CI) and Continuous Delivery (CD).
 
-Source code control with GitHub.
-
-Continuous Integration (CI) using GitHub Actions for linting, testing, and installation.
-
-Continuous Delivery (CD) with Azure Pipelines for automated deployment.
-
-Deployment to Azure App Service (PaaS) running a Flask-based ML API.
+Source code control with GitHub.  
+Continuous Integration (CI) using GitHub Actions for linting, testing, and installation.  
+Continuous Delivery (CD) with Azure Pipelines for automated deployment.  
+Deployment to Azure App Service (PaaS) running a Flask-based ML API.  
 
 ## Project Plan
 
@@ -22,97 +19,130 @@ Deployment to Azure App Service (PaaS) running a Flask-based ML API.
 
 ## Instructions
 
-<TODO:  
 * Architectural Diagram
+
 ![CI Diagram](images/CI%20diagram.png)  
 ![CD Diagram](images/CD%20diagram.png)
 
-* Project running on Azure App Service
+### 1. Configuring Github
 
-# 1 Configuring Github
-
-Login to Azure cloud shell
+Login to Azure cloud shell  
 Generate ssh key
-'''bash
+
+```bash
 ssh-keygen -t rsa
-'''
+```
+
 Copy the key and paste it in Github > Settings> SSH and GPG keys
-'''bash
+```bash
 cat .ssh/id.rsa.pub
-'''
+```
+
 Test ssh connection to github
-'''bash
+
+```bash
 ssh -T git@github.com
-'''
+```
 ![SSH connection](images/successful%20ssh%20connection%20from%20cloud%20shell.png)
 
-# 2 Setup environment
+### 2. Setup environment
 
 Clone the Repository
-'''bash
+
+```bash
 git clone git@github.com:ajaytalloju/azure-devops-cicd-pipeline.git
-'''
+```
+
 ![Project cloned into Azure Cloud Shell](images/git%20repo%20clone.png)
 
 Create virtual environment
-'''bash
+
+```bash
 cd azure-devops-cicd-pipeline
 make setup
-'''
+```
+
 Activate venv
-'''bash
+
+```bash
 source ~/.azure-devops-cicd-pipeline/bin/activate
-'''
+```
+
 Install dependencies and run linting, testing
-'''bash
+
+```bash
 make all
-'''
-![Setup env](images/make%20setup%20and%20make%20all.png)
+```
+
 ![Successful Tests](images/make%20all%20success.png)
 
 * Output of a test run
+
 ![Test Run](images/app.py%20test%20run.png)
 
 * Test prediction
+
 ![Test prediction](images/successful%20prediction%20test.png)
 
-# 3 Creating Azure webapp
-'''bash
+### 3. Creating Azure webapp
+
+```bash
 az webapp up -n ajay-flask-ml-webapp -g Azuredevops --sku B1
-'''
+```
+
 Check URL of webapp
-'''bash
+
+```bash
 az webapp show -n ajay-flask-ml-webapp -g Azuredevops --query defaultHostName
-'''
+```
+
 ![Webapp Info](images/get%20webapp%20URL.png)
 
 * Check prediction from webapp
-'''bash
+
+```bash
 sh make_predict_azure_app.sh
-'''
+```
+
 ![Webapp prediction](images/successful%20prediction%20webapp.png)
 
 * Check logs of webapp
-'''bash
+
+```bash
 az webapp log tail -n ajay-flask-ml-webapp -g Azuredevops
-'''
+```
+
 ![Log](images/Streamline%20log%20of%20webapp.png)
 
 * Check web interface of application
+
 ![Web interface](images/App%20running%20web%20interface.png)
 
-# 4 Setup CI/CD pipeline
+### 4. Setup CI/CD pipeline
 
 * Setup CI using Github Actions
-![CI](images/successful%20CI%20with%20Github%20Actions.png)
+
+![CI](images/CI%20success%20using%20github%20actions.png)
 
 * Setup Azure Pipelines
-Login to Azure Devops Organization
-Create a project with Github as source code repository
-A push will run the pipeline automatically
-![Azure Pipeline](images/Successful%20CI:CD%20Azure%20Pipeline.png)
+
+Login to Azure Devops Organization  
+Create a project with Github as source code repository  
+A push will run the pipeline automatically  
+
+![Azure Pipeline](images/successful%20Azure%20Pipeline%202.png)
 
 [Note the official documentation should be referred to and double checked as you setup CI/CD](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops).
+
+### 5. Load Test
+
+* Check performance test using locust
+
+```bash
+pip install locust
+locust -f locustfile.py --host=https://ajay-flask-ml-webapp.azurewebsites.net
+```
+![Locust Log](images/load%20test%20using%20locust%20chart.png)
 
 ## Enhancements
 
@@ -120,3 +150,4 @@ A push will run the pipeline automatically
 * Monitoring: Integrate Azure Monitor or Application Insights to track performance and errors.
 
 ## Demo
+[Link](https://youtu.be/HrrPF-g2RFM)
