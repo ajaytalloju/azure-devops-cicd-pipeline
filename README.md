@@ -14,7 +14,7 @@ Deployment to Azure App Service (PaaS) running a Flask-based ML API.
 
 ## Project Plan
 
-* Link to Trello Board: [Trello Board](https://trello.com/invite/b/68a98088f34b1b0dd009487e/ATTI270cf3de6531b6073ab898cd74c2e4f91706B70D/azure-devops-project-2-ci-cd-pipeline)
+* Link to Trello Board: [Trello Board](https://trello.com/b/R0NsieII)
 * Link to spreadsheet of project plan: [Project plan](https://docs.google.com/spreadsheets/d/1xD8k5tAZsOyudxcCCzJGMHDJgEwFAX-DFNKFdtgRHn4/edit?usp=sharing)
 
 ## Instructions
